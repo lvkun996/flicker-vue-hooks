@@ -3,7 +3,7 @@ import theme from "./theme.js";
 import { hopeTheme } from "vuepress-theme-hope";
 
 export default defineUserConfig({
-  base: "/flicker-vue-hooks/",
+  base: "/",
   lang: "zh-CN",
   title: "flicker-vue-hooks",
   description: "flicker-vue-hooks",
@@ -11,4 +11,3 @@ export default defineUserConfig({
   // 和 PWA 一起启用
   // shouldPrefetch: false,
 });
-
