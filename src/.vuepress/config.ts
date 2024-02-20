@@ -8,7 +8,6 @@ export default defineUserConfig({
   title: "flicker-vue-hooks",
   description: "flicker-vue-hooks",
   theme: theme
-
   // 和 PWA 一起启用
   // shouldPrefetch: false,
 });
