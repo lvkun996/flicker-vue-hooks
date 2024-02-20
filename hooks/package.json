@@ -1,10 +1,12 @@
 {
   "name": "flicker-vue-hooks",
   "private": false,
-  "version": "1.0.52",
+  "version": "1.0.57",
   "type": "module",
   "types": "dist/index.d.ts",
-  "files": ["dist/*" ],
+  "files": [
+    "dist/*"
+  ],
   "main": "./dist/flicker-vue-hooks.umd.js",
   "module": "./dist/flicker-vue-hooks.es.js",
   "scripts": {

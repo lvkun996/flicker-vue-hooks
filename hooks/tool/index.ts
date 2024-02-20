@@ -1,10 +1,10 @@
-import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, onMounted } from "vue"
+import { onUnmounted, ref, isRef, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, onMounted } from "vue"
 
 /** 
  * @description  导出一个名为 useId 的常量变量，该变量生成一个随机的十六进制字符串
  * @example const id = useId()
 */
- function useId () { 
+export function useId () { 
   return Math.random().toString(16).slice(2)
 }
 
@@ -18,29 +18,21 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  * else unobserve()
  * 
 */
- const useInViewport = (el: Ref<HTMLElement>) => {
+export const useInViewport = (el: Ref<HTMLElement> | HTMLElement, cb: (isIntersecting: boolean) => void) => {
 
-  const inViewport = ref<boolean>(false)
+  const _el = isRef(el) ?  el.value : el
 
-  const observer = new IntersectionObserver((entrys) => {
-    entrys.forEach(entry => {
-      inViewport.value = entry.isIntersecting
-    })
-  })
-
-  observer.observe(el.value)
-
+  const observer = new IntersectionObserver((entrys) => entrys.forEach(entry => cb && cb(entry.isIntersecting)))
+  
+  observer.observe(_el)
+  
   onUnmounted(() => {
     observer.disconnect()
   })
-
-  return {
-    inViewport: inViewport.value,
-    unobserve: () =>  observer.unobserve(el.value)
+  
+  return () => observer.unobserve(_el)
+  
   }
-
-}
-
 
 /**
  * @description 竞态锁  防止函数并发执行
@@ -75,7 +67,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  * // counter previous value: {previous = 0}
  */
 
- function usePrevious <T>(params: Ref<T>): Ref<T | undefined> {
+export function usePrevious <T>(params: Ref<T>): Ref<T | undefined> {
 
   const r = ref<T>()
 
@@ -100,7 +92,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  *  })
  */
 
- const usePromise = <T>(cb: (resolve: (value: T) => void, reject: (reason?: any) => void) => void): [(value: T) => void,  (reason?: any) => void] => {
+export const usePromise = <T>(cb: (resolve: (value: T) => void, reject: (reason?: any) => void) => void): [(value: T) => void,  (reason?: any) => void] => {
 
   const _resolve = ref()
   const _reject = ref()
@@ -114,6 +106,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
   return [ _resolve.value, _reject.value ]
 
 }
+
 
 
 /**
@@ -131,9 +124,9 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  *  reset() // {name: 'flicker vue hooks'}
  */
 
- const useReactive = <T extends Object>(record: T): { state: UnwrapNestedRefs<T>, reset: T | null | {} } => {
+export const useReactive = <T extends Object>(record: T): { state: UnwrapNestedRefs<T>, reset: (record: any) => void } => {
 
-  const initState = ref<T>(record)
+  const initState = ref<T>(JSON.parse(JSON.stringify(record)))
 
   const state = reactive<T>(record)
 
@@ -172,7 +165,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  * })  // 计时器运行
  *
  */
- const useScheduler = (cb: Function, delay: number) => {
+export const useScheduler = (cb: Function, delay: number) => {
   const stx: UseSchedulerFastCall = {
     timeId: null,
     start: () => {},
@@ -216,7 +209,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  * 
  * useSchedulerOnce(() => do somethings, 1000 )
  */
- const useSchedulerOnce = (  
+export const useSchedulerOnce = (  
   cb: () => void,
   delay: number = 4
 ) => {
@@ -251,7 +244,7 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
  *  onError((e) => {})  // 发生错误回调
 */
 
- const useSSE = <T>({
+export const useSSE = <T>({
   url,    
   immediate = false
 }: {
@@ -301,18 +294,4 @@ import { onUnmounted, ref, Ref, watchEffect, reactive, UnwrapNestedRefs, warn, o
     onError
   }
 
-}
-
-
-
-export {
-  useId,
-  useInViewport,
-  useLockFn,
-  usePrevious,
-  usePromise,
-  useReactive,
-  useScheduler,
-  useSchedulerOnce,
-  useSSE,
 }

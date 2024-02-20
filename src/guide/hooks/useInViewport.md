@@ -7,12 +7,15 @@ title: useInViewport
 ## API
 
 ```html
-<div id='app' >app<div>
+<div ref='app' >app</div>
 ```
 
 ```typescript
+const app = ref()
 
-const { inViewport, unobserve } = useInViewport(document.getElementById('app'))
+const unobserve = useInViewport(app, (isIntersecting) => {
+  console.log(isIntersecting) // 当前元素隐藏状态
+})
 
 // unobserve() 关闭检测
 
