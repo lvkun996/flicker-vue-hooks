@@ -1,0 +1,22 @@
+{
+  "name": "flicker-vue-hooks",
+  "private": false,
+  "version": "1.0.52",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "files": ["dist/*" ],
+  "main": "./dist/flicker-vue-hooks.umd.js",
+  "module": "./dist/flicker-vue-hooks.es.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.4.15"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.1.0",
+    "vue-tsc": "^1.8.27",
+    "vite-plugin-dts": "^3.7.2"
+  }
+}
