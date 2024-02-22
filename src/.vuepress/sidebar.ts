@@ -10,11 +10,29 @@ export default sidebar({
       link: "guide/intro/"
     },
     {
-      icon: "lightbulb",
-      text: "hooks",
-      prefix: "guide/hooks/",
-      collapsible: true,
+      text: "Scene",
+      prefix: "guide/Scene/",
       children: "structure"
     },
+    {
+      text: "State",
+      prefix: "guide/State/",
+      children: "structure"
+    },
+    {
+      text: "Effect",
+      prefix: "guide/Effect/",
+      children: "structure"
+    },
+    {
+      text: "Dom",
+      prefix: "guide/Dom/",
+      children: "structure"
+    },
+    {
+      text: "LifeCycle",
+      prefix: "guide/LifeCycle/",
+      children: "structure"
+    }
   ],
 });

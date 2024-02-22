@@ -47,6 +47,7 @@ export default hopeTheme({
       repoId: "R_kgDOG_Pt2A",
       category: "Announcements",
       categoryId: "DIC_kwDOG_Pt2M4COD69",
+      comment: false
     },
 
     components: {
@@ -82,8 +83,8 @@ export default hopeTheme({
       sup: true,
       tabs: true,
       vPre: true,
-
-      // 在启用之前安装 chart.js
+      vuePlayground: true
+      // 在启用之前 安装 chart.js
       // chart: true,
 
       // insert component easily
@@ -121,6 +122,8 @@ export default hopeTheme({
       // install sandpack-vue3 before enabling it
       // sandpack: true,
     },
+
+    
 
     // 如果你需要 PWA。安装 vuepress-plugin-pwa2 并取消下方注释
     // pwa: {

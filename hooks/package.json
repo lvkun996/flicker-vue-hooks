@@ -1,7 +1,7 @@
 {
   "name": "flicker-vue-hooks",
   "private": false,
-  "version": "1.0.57",
+  "version": "1.0.58",
   "type": "module",
   "types": "dist/index.d.ts",
   "files": [

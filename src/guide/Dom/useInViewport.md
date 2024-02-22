@@ -11,6 +11,7 @@ title: useInViewport
 ```
 
 ```typescript
+
 const app = ref()
 
 const unobserve = useInViewport(app, (isIntersecting) => {

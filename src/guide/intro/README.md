@@ -1,8 +1,6 @@
 ---
 title: 介绍
 icon: lightbulb
-
-
 ---
 
 通过该章节，你将了解到如何快速开始使用 Flicker-Vue-Hooks
