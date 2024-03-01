@@ -6,12 +6,12 @@ heroImage: /logo.svg
 heroText: flicker-vue-hooks
 tagline: 基于vue3的hooks，解决你的hooks需求。
 actions:
-  - text: 使用指南 💡
-    link: /demo/
+  - text: 文档 💡
+    link: /guide/intro/
     type: primary
 
-  - text: 文档
-    link: /guide/
+  - text: Git Hub
+    link: https://github.com/lvkun996/flicker-vue-hooks
 
 
 

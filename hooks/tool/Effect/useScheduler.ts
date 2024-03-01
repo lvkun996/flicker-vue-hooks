@@ -3,9 +3,14 @@ import { ref, onUnmounted } from 'vue'
 export interface UseScheduler {
   start: () => void
   pause: () => void
-  onPlaying: () => void,
   resume: () => void
   stop: () => void
+}
+
+
+export interface Options {
+  delay?: number,
+  onPlaying?: (stamp: number) => void
 }
 
 /**
@@ -24,12 +29,17 @@ export interface UseScheduler {
  * })  // 计时器运行
  *
  */
-const useScheduler = (cb: Function, delay: number) => {
-  const stx: UseScheduler = {
+const useScheduler = (
+  cb: Function,
+  options?: Options
+  ) => {
+    
+    const { delay = 1000, onPlaying = function () {} } = options || {delay : 1000 , onPlaying() {}}
+    
+    const stx: UseScheduler = {
     start: () => {},
     pause: () => {},
     resume: () => {},
-    onPlaying: () => {},
     stop: () => {}
   }
 
@@ -37,9 +47,7 @@ const useScheduler = (cb: Function, delay: number) => {
 
   const stamp = ref(0)
 
-  const playing = (playingCb?: Function) => {
-    playingCb && playingCb(stamp.value)
-  }
+  const playing = () => onPlaying(stamp.value)
 
   const clearScheduler = () => timeId.value && clearInterval(timeId.value)
 
@@ -62,8 +70,6 @@ const useScheduler = (cb: Function, delay: number) => {
     timeId.value = null
     stamp.value = 0
   }
-
-  stx.onPlaying = playing
 
   onUnmounted(clearScheduler)
 

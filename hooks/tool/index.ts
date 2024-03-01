@@ -16,6 +16,20 @@ import usePrevious from './State/usePrevious'
 
 import useReactive from './State/useReactive'
 
+import useClickAway from './Dom/useClickAway'
+
+import useEventListener from './Dom/useEventListener'
+
+import useHover from './Dom/useHover'
+
+import useMouse from './Dom/useMouse'
+
+import useDebounce from './Effect/useDebounce'
+
+import useThrottle from './Effect/useThrottle'
+
+import useTextSelection from './Scene/useTextSelection'
+
 
 export  {
   useId,
@@ -26,5 +40,12 @@ export  {
   useSchedulerOnce,
   useScheduler,
   usePromise,
-  useInViewport
+  useInViewport,
+  useClickAway,
+  useEventListener,
+  useHover,
+  useMouse,
+  useDebounce,
+  useThrottle,
+  useTextSelection
 }

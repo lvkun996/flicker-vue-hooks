@@ -11,7 +11,6 @@ icon: lightbulb
 - 🔋 支持 SSR
 - 🛸 丰富的 Hooks
 - 🏟️ 覆盖大部分业务场景
-- 🦾 首选 useRequest，强大的请求中间层
 - 🎪 交互式 demo，身临其境
 - 🎯 使用 TypeScript 构建，提供完整的类型定义文件
 - 🪄 支持按需加载，减少打包体积
@@ -26,61 +25,11 @@ npm i flicker-vue-hooks
 
 ## 🔨 使用
 
-### 全量引入
+### 引入
 
 ```typescript
-import { useRequest } from 'flicker-vue-hooks'
+import { useId } from 'flicker-vue-hooks'
 ```
-
-### 按需引入
-
-```typescript
-import useRequest from 'flicker-vue-hooks/es/useRequest'
-```
-
-### 自动引入
-
-使用 `unplugin-auto-import` 的 `resolver`
-
-```bash
-
-npm i -D @flicker-vue-hooks/resolvers
-
-```
-
-#### Vite
-
-```typescript
-import AutoImport from 'unplugin-auto-import/vite'
-import { VueHooksPlusResolver } from '@flicker-vue-hooks/resolvers'
-
-export const AutoImportDeps = () =>
-  AutoImport({
-    imports: ['vue', 'vue-router'],
-    include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-    dts: 'src/auto-imports.d.ts',
-    resolvers: [VueHooksPlusResolver()],
-  })
-```
-
-#### Webpack
-
-```typescript
-const { VueHooksPlusResolver } = require('@flicker-vue-hooks/resolvers')
-module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-auto-import/webpack')({
-      imports: ['vue', 'vue-router'],
-      include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-      dts: 'src/auto-imports.d.ts',
-      resolvers: [VueHooksPlusResolver()],
-    }),
-  ],
-}
-```
-
-其他支持的工具, 更多请看 [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
 
 <br />
 

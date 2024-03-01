@@ -1,4 +1,4 @@
-import { onUnmounted, isRef, Ref, unref } from "vue"
+import { onUnmounted, isRef, Ref, unref, onMounted } from "vue"
 
 /** 
  * 
@@ -14,11 +14,9 @@ import { onUnmounted, isRef, Ref, unref } from "vue"
 
   const observer = new IntersectionObserver((entrys) => entrys.forEach(entry => cb && cb(entry.isIntersecting)))
   
-  observer.observe(unref(el))
-  
-  onUnmounted(() => {
-    observer.disconnect()
-  })
+  onMounted(() => observer.observe(unref(el)))
+
+  onUnmounted(() => observer.disconnect())
   
   return () => observer.unobserve(unref(el))
   

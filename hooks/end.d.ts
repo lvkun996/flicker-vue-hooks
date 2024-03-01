@@ -7,3 +7,7 @@ declare module "*.vue" {
 declare interface Window {
   Vue: any,
 }
+
+declare interface FLICKER {
+  
+}

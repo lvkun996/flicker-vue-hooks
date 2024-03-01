@@ -1,4 +1,4 @@
-import { onUnmounted } from 'vue'
+import { onUnmounted, ref } from 'vue'
 
 /**
  * @description 只会执行一次定时器， 会在执行完后销毁
@@ -8,18 +8,27 @@ import { onUnmounted } from 'vue'
  * 
  * useSchedulerOnce(() => do somethings, 1000 )
  */
-const useSchedulerOnce = (  
+const useSchedulerOnce = (
   cb: () => void,
   delay: number = 4
 ) => {
 
-  const timeId = setTimeout(() => {
+  const timeId = ref<NodeJS.Timeout>()
+
+  timeId.value = setTimeout(() => {
     cb()
-    clearTimeout(timeId)
+    stop()
   }, delay)
+  
+  const stop = () => {
+    if (!timeId.value) return
+    clearTimeout(timeId.value)
+    timeId.value = null as unknown as NodeJS.Timeout
+  }
+  
+  onUnmounted(stop)
 
-  onUnmounted(() => clearTimeout(timeId))
-
+  return stop
 }
 
 

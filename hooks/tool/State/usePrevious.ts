@@ -1,4 +1,4 @@
-import { Ref, ref, watchEffect } from 'vue'
+import { Ref, isReactive, ref, unref, watchEffect } from 'vue'
 
 /**
  * @description 保存上一次状态的 Hook
@@ -11,18 +11,17 @@ import { Ref, ref, watchEffect } from 'vue'
  * // counter current value: {count = 1}
  * // counter previous value: {previous = 0}
  */
-function usePrevious <T>(params: Ref<T>): Ref<T | undefined> {
+function usePrevious <T>(params: T) {
 
-  const r = ref<T>()
-
-  const pre = ref<T>()
+  const pre = ref<T>();
+  const current = ref<T>();
   
   watchEffect(() => {
-    r.value = pre.value
-    pre.value = params.value
+    pre.value = current.value;
+    current.value = isReactive(params) ? ({ ...params }) : unref(params);
   })
 
-  return r
+  return pre
 }
 
 

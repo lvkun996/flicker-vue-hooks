@@ -12,6 +12,8 @@ import { UnwrapNestedRefs, ref, reactive } from 'vue'
  *  console.log(state) // {name: 'flicker'}
  * 
  *  reset() // {name: 'flicker vue hooks'}
+ * 
+ *  reset({name: 'vue hooks'}) // {name: 'vue hooks'}
  */
 
 const useReactive = <T extends Object>(record: T): { state: UnwrapNestedRefs<T>, reset: (record: any) => void } => {

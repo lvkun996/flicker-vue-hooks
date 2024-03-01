@@ -4,8 +4,6 @@ title: useLockFn
 
 竞态锁  防止函数并发执行
 
-
-
 ## ✨ 使用
 
 
@@ -56,8 +54,20 @@ const submit = useLockFn( async ( ) => {
 
 ```typescript
 
-useLockFn(() => {
-  // do somethings
-})
+useLockFn(
+  cb: () => void
+)
 
 ```
+
+## Params
+| 参数  | 说明 | 类型 | 默认值 |
+| --- | --- |  --- | --- |
+| cb    | 回调函数  | () => void | - |
+
+
+## Result
+| 参数  | 说明 | 类型 | 默认值 |
+| --- | --- |  --- | --- |
+| result | 调用函数  | （） => void | - |
+
